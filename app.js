@@ -105,6 +105,11 @@
       var payload = JSON.parse(base64UrlDecode(encoded));
 
       telegramId = String(payload.telegram_id || '');
+      var storedLanguage = String(payload.language || '').toLowerCase();
+      if (storedLanguage && T[storedLanguage]) {
+        lang = storedLanguage;
+        localStorage.setItem('dfb_lang', lang);
+      }
       farms = Array.isArray(payload.farms) ? payload.farms : [];
 
       farms = farms.map(function(farm) {
